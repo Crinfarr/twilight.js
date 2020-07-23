@@ -1,0 +1,24 @@
+{
+  "name": "twilights.js",
+  "version": "1.0.0",
+  "description": "twitter to lights generator",
+  "main": "main.js",
+  "dependencies": {
+    "magic-home": "^2.5.0",
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crinfarr/twilights.js.git"
+  },
+  "author": "Crinfarr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Crinfarr/twilights.js/issues"
+  },
+  "homepage": "https://github.com/Crinfarr/twilights.js#readme"
+}
