@@ -4,6 +4,7 @@
   "description": "twitter to lights generator",
   "main": "main.js",
   "dependencies": {
+    "fs": "0.0.1-security",
     "magic-home": "^2.6.1",
     "twit": "^2.2.11"
   },

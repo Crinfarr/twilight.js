@@ -1,47 +1,50 @@
+'use strict';
+
 const {MH, Discovery, Control} = require('magic-home');
-const prompt = require('prompt');
+const fs = require('fs');
 
 let discover = new Discovery();
-controller = new Control();
+let controller = new Control();
 
 let discovered;
-
+let i;
 var scan = function() {
     return new Promise(resolve => {
-        discover.scan(1000).then(devices => {
+        discover.scan(2000).then(devices => {
             console.log("returned values")
             resolve(devices);
         });
     });
 }
 
-var layout = Object;
-
-//var countdown = async function(from) {
-//    for (x=0; x<=from, x++;) {
-//        setTimeout(() => {
-//            console.log(from-x+" seconds remaining.");
-//        }, 1000)
-//    }
-//}
-
-var main  = async function() {
-    discovered = await scan();
-    console.log("wait finished");
-    console.log(discovered);
-    i = 1;
+var lightsOut = function() {
     discovered.forEach(element => {
-        console.log("Light "+i+" address:"+element.address);
-        i++;
         controller = new Control(element.address);
         controller.turnOff();
     });
-    i=1;
+}
+
+var lightsUp = function() {
     discovered.forEach(element => {
         controller = new Control(element.address);
-        controller.turnOn()
-        //console.log("THIS IS LIGHT NUMBER "+i+"!\nWrite this down.\n");
+        controller.turnOn();
     });
 }
-prompt.start();
+
+var main  = async function() {
+    discovered = await scan();
+    console.log("scan finished");
+    console.log(discovered);
+    i = 1;
+    lightsOut();
+    setTimeout(() => {
+        lightsUp();
+    }, 10000);
+}
 main();
+console.log("writing to file in 15 seconds");
+setTimeout(() => {fs.writeFile("lightData", JSON.stringify(discovered), (err) =>{
+    if (err) throw err;
+    console.log("wrote data to file: lightData.json");
+    })
+}, 15000);

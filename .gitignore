@@ -106,3 +106,4 @@ dist
 # Private info
 .config.js
 config.js
+lightData
