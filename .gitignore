@@ -107,3 +107,4 @@ dist
 .config.js
 config.js
 lightData
+lightData.json
