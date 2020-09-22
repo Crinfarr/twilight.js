@@ -5,6 +5,8 @@
   "main": "main.js",
   "dependencies": {
     "fs": "0.0.1-security",
+    "get-pixels": "^3.3.2",
+    "jimp": "^0.16.1",
     "magic-home": "^2.6.1",
     "twit": "^2.2.11"
   },
