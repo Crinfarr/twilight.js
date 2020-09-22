@@ -109,3 +109,5 @@ config.js
 lightData
 lightData.json
 twilight.js.code-workspace
+Scripts/
+pyvenv.cfg
