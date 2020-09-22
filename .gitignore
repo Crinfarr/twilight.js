@@ -40,6 +40,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+Lib/
 
 # TypeScript v1 declaration files
 typings/
@@ -103,7 +104,7 @@ dist
 # TernJS port file
 .tern-port
 
-# Private info
+# other
 .config.js
 config.js
 lightData
@@ -111,3 +112,4 @@ lightData.json
 twilight.js.code-workspace
 Scripts/
 pyvenv.cfg
+share/
