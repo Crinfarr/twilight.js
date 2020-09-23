@@ -1,22 +1,24 @@
 const Jimp = require("jimp");
 const gp = require("get-pixels");
 const { promises } = require("fs");
+const { getPixelColor } = require("jimp");
+const fs = require("fs");
 
 var cmdArgs = process.argv;
-var rW = parseInt(cmdArgs[3]);
-var rH = parseInt(cmdArgs[4]);
+var imgIn = (cmdArgs[2] != undefined) ? cmdArgs[2] : "./testimg.jpg";
+var rW = (cmdArgs[3] != undefined) ? parseInt(cmdArgs[3]) : 10;
+var rH = (cmdArgs[4] != undefined) ? parseInt(cmdArgs[4]) : 10;
+var filename = (cmdArgs[5] != undefined) ? cmdArgs[5] : `img(${rW} by ${rH}).jpg`;
 console.log(cmdArgs);
 let imgOut;
-if (cmdArgs[5] == undefined) {
-    filename = `img(${rW} by ${rH}).jpg`
-} 
-else filename = cmdArgs[5];
+pixels = new Object;
+
 
 resizeImage = async function() {
     return new Promise(resolve => {
-        Jimp.read(cmdArgs[2], (err, image) => {
+        Jimp.read(imgIn, (err, img) => {
             if (err) throw err;
-            imgOut = image.contain(rW, rH).autocrop().write(`./tmpimages/${filename}`);
+            imgOut = img.contain(rW, rH).autocrop().write(`./tmpimages/${filename}`);
             resolve(imgOut);
         });
     });
@@ -24,6 +26,14 @@ resizeImage = async function() {
 
 main = async function() {
     console.log(await resizeImage()+`\nImage name: ${filename}`);
+    for (i=0; i<=rW; i++) {
+        var newkey = {}
+        for (j=0; j<=rH; j++) {
+            newkey[j] = (imgOut.getPixelColor(i, j).toString(16).length != 1) ? imgOut.getPixelColor(i, j).toString(16).substring(0, imgOut.getPixelColor(i, j).toString(16).length-2) : imgOut.getPixelColor(i, j).toString(16)+"00000";
+        }
+        pixels[i] = newkey;
+    }
+    console.log(pixels)
 }
 
 main();
