@@ -8,7 +8,8 @@
     "get-pixels": "^3.3.2",
     "jimp": "^0.16.1",
     "magic-home": "^2.6.1",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {},
   "scripts": {

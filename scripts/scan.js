@@ -17,6 +17,7 @@ var scan = function() {
     });
 }
 
+/*
 var lightsOut = function() {
     discovered.forEach(element => {
         controller = new Control(element.address);
@@ -30,17 +31,33 @@ var lightsUp = function() {
         controller.turnOn();
     });
 }
+*/
+
+var lightsChange = function(OnOff) {
+    discovered.forEach(element => {
+        controller = new Control(element.address);
+        switch (OnOff){
+            case "on":
+                controller.turnOn();
+                break;
+            case "off":
+                controller.turnOff();
+                break;
+        }
+    })
+}
 
 var main  = async function() {
     discovered = await scan();
     console.log("scan finished");
     console.log(discovered);
     i = 1;
-    lightsOut();
+    lightsChange("off");
     setTimeout(() => {
-        lightsUp();
+        lightsChange("on");
     }, 10000);
 }
+
 main();
 console.log("writing to file in 15 seconds");
 setTimeout(() => {fs.writeFile("lightData.json", JSON.stringify(discovered), (err) =>{
