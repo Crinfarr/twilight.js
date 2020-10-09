@@ -1,4 +1,4 @@
-# TWILIGHTS.js
+# TWILIGHT.js
 ## a library to make annoying yourself EVEN EASIER.
 
 #### more readme to come when I feel like it
