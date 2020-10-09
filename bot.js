@@ -50,6 +50,17 @@ client.on('message', async msg => {
                         getImg(imgurl, path).then(function() {
                             Jimp.read(path).then(img => {
                                 img.contain(parseInt(args[0]), parseInt(args[1])).autocrop().write(rspath);
+                            }).then(function() {
+                                /*var embed = new Discord.MessageEmbed()
+                                    .setTitle(`:black_large_square:Here's your image resized to ${args[0]} by ${args[1]}!`)
+                                    .attachFiles([rspath])
+                                    .setImage(`attachment://rsimage.${extension}`);
+                                msg.channel.send(embed);*/
+                                attachment = new Discord.MessageAttachment(rspath);
+                                msg.channel.send(`Here's your image resized to ${args[0]} by ${args[1]}, <@${msg.author.id}>!`, attachment);
+                            }).finally(function() {
+                                fs.unlinkSync(path);
+                                fs.unlinkSync(rspath);
                             });
                         })
                         
@@ -70,6 +81,19 @@ client.on('message', async msg => {
                     msg.channel.send(':x: Unknown error!');
 
                 }
+            case("lighton"): 
+                
+                break;
+            case("lightoff"):
+                
+                break;
+            case("lightcolor"):
+                
+                break;
+            case("lights"):
+                msg.channel.send(config.lights.lightdesc);
+                console.log(config.lights.lights);
+                break;
             default:
                 break;
         }

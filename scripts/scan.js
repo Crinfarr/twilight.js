@@ -60,7 +60,7 @@ var main  = async function() {
 
 main();
 console.log("writing to file in 15 seconds");
-setTimeout(() => {fs.writeFile("lightData.json", JSON.stringify(discovered), (err) =>{
+setTimeout(() => {fs.writeFile("../lightData.json", JSON.stringify(discovered), (err) =>{
     if (err) throw err;
     console.log("wrote data to file: lightData.json");
     })
