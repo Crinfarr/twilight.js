@@ -1,7 +1,9 @@
 const config = require('./config');
 const Discord = require(`discord.js`);
 const fs = require('fs');
+const mh = require('magic-home');
 const Jimp = require('jimp');
+const { Control } = require('magic-home');
 const request = require('request').defaults({encoding:null});
 let image;
 
@@ -82,17 +84,29 @@ client.on('message', async msg => {
 
                 }
             case("lighton"): 
-                
+                if (args.length != 1) {
+                    msg.channel.send("Usage: lighton [light]\n\nUse !lights for a list of lights.");
+                }
+                else {
+                    var ctrl = new Control(config.lighting.lights[config.lighting.lightindexes[args[0]]].address);
+                    ctrl.turnOn();
+                }
                 break;
             case("lightoff"):
-                
+                if (args.length != 1) {
+                    msg.channel.send("Usage: lightoff [light]\n\nUse !lights for a list of lights.");
+                }
+                else {
+                    var ctrl = new Control(config.lighting.lights[config.lighting.lightindexes[args[0]]].address);
+                    ctrl.turnOff();
+                }
                 break;
             case("lightcolor"):
                 
                 break;
             case("lights"):
-                msg.channel.send(config.lights.lightdesc);
-                console.log(config.lights.lights);
+                msg.channel.send(config.lighting.lightdesc);
+                console.log(config.lighting.lights);
                 break;
             default:
                 break;
