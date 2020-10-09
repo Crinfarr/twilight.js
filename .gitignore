@@ -116,3 +116,4 @@ pyvenv.cfg
 share/
 tmpimages/
 .vscode
+rstmpimages/
