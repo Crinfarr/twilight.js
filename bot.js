@@ -5,7 +5,6 @@ const mh = require('magic-home');
 const Jimp = require('jimp');
 const { Control } = require('magic-home');
 const request = require('request').defaults({encoding:null});
-let image;
 
 var args = process.argv;
 const client = new Discord.Client();
