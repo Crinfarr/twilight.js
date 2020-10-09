@@ -116,7 +116,7 @@ client.on('message', async msg => {
                     msg.channel.send(embed);
                 }
                 break;
-            case("lightcolor"):
+            /*case("lightcolor"):
                 if (args.length != 2) {
                     msg.channel.send("Usage: lightcolor [light] [hex color]\n\n")
                 }
@@ -146,9 +146,15 @@ client.on('message', async msg => {
                     ctrl.setColorAndWhites(color.r, color.g, color.b, 0);
                     msg.channel.send(embed);
                 }
-                break;
+                break;*/
             case("lights"):
                 msg.channel.send(config.lighting.lightdesc);
+                break;
+            case ('help'):
+                var embed = new Discord.MessageEmbed()
+                    .setTitle("Command reference")
+                    .setDescription("!lights: Lists available lights to change\n!downrez [x resize] [y resize]: Resizes most attached images\n!lighton [light ID]: powers on a light\n!lightoff [light ID]: powers off a light\n\n!lightcolor COMING SOON.");
+                msg.channel.send(embed);
                 break;
             default:
                 break;
