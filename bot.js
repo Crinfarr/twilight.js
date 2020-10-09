@@ -88,8 +88,16 @@ client.on('message', async msg => {
                     msg.channel.send("Usage: lighton [light]\n\nUse !lights for a list of lights.");
                 }
                 else {
-                    var ctrl = new Control(config.lighting.lights[config.lighting.lightindexes[args[0]]].address);
+                    var ctrl = new Control(config.lighting.lights[config.lighting.lightindexes[args[0].toUpperCase()]].address);
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#FFFF00')
+                        .setTitle(`${args[0].toUpperCase()} turned on by ${msg.author.username}!`)
+                        .setThumbnail(msg.author.avatarURL)
+                        .attachFiles(['./images/Twilightjs_logo_sm.png'])
+                        .setAuthor('TwilightBot', 'attachment://Twilightjs_logo_sm.png')
+                        .setTimestamp();
                     ctrl.turnOn();
+                    msg.channel.send(embed);
                 }
                 break;
             case("lightoff"):
@@ -97,16 +105,51 @@ client.on('message', async msg => {
                     msg.channel.send("Usage: lightoff [light]\n\nUse !lights for a list of lights.");
                 }
                 else {
-                    var ctrl = new Control(config.lighting.lights[config.lighting.lightindexes[args[0]]].address);
+                    var ctrl = new Control(config.lighting.lights[config.lighting.lightindexes[args[0].toUpperCase()]].address);
+                    var embed = new Discord.MessageEmbed()
+                        .setColor('#000000')
+                        .setTitle(`${args[0].toUpperCase()} turned off by ${msg.author.username}!`)
+                        .setThumbnail(msg.author.avatarURL)
+                        .attachFiles(['./images/Twilightjs_logo_sm.png'])
+                        .setAuthor('TwilightBot', 'attachment://Twilightjs_logo_sm.png')
+                        .setTimestamp();
                     ctrl.turnOff();
+                    msg.channel.send(embed);
                 }
                 break;
             case("lightcolor"):
-                
+                if (args.length != 2) {
+                    msg.channel.send("Usage: lightcolor [light] [hex color]\n\n")
+                }
+                else {
+                    var TMPcolor = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(args[1]);
+                    try {
+                        var color = {
+                            hex: TMPcolor[0],
+                            r: parseInt(TMPcolor[1], 16),
+                            g: parseInt(TMPcolor[2], 16),
+                            b: parseInt(TMPcolor[3], 16)
+                        }
+                    }
+                    catch {
+                        msg.channel.send(':x: Invalid color!')
+                        return;
+                    }
+                    //console.log(`R: ${color.r}\nG: ${color.g}\nB: ${color.b}\nHEX: ${color.hex}`);
+                    var ctrl = new Control(config.lighting.lights[config.lighting.lightindexes[args[0].toUpperCase()]].address);
+                    var embed = new Discord.MessageEmbed()
+                        .setColor(color.hex)
+                        .setTitle(`${args[0].toUpperCase()} set to ${color.hex} by ${msg.author.username}!`)
+                        .setThumbnail(msg.author.avatarURL)
+                        .attachFiles(['./images/Twilightjs_logo_sm.png'])
+                        .setAuthor('TwilightBot', 'attachment://Twilightjs_logo_sm.png')
+                        .setTimestamp();
+                    ctrl.setColorAndWhites(color.r, color.g, color.b, 0);
+                    msg.channel.send(embed);
+                }
                 break;
             case("lights"):
                 msg.channel.send(config.lighting.lightdesc);
-                console.log(config.lighting.lights);
                 break;
             default:
                 break;
