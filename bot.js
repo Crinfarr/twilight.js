@@ -13,14 +13,16 @@ client.once('ready', () => {
     console.log(`Successfully logged in as ${client.user.tag}!`)
 });
 
-async function getImg(url, path) {
+/*async function getImg(url, path) {
     return new Promise(resolve => {
         request.get(url, function (error, response, body) {
-            fs.writeFileSync(path, Buffer.from(body));
+            Jimp.read(Buffer.from(body)).then(image => {
+
+            });
             resolve();
         });
     })
-}
+}*/
 
 client.on('message', async msg => {
         if (msg.content.toLowerCase().includes("daddy") && config.daddymode) {
@@ -45,25 +47,32 @@ client.on('message', async msg => {
                     try {
                         console.log(msg.attachments.array()[0].url);
                         var imgurl = msg.attachments.array()[0].url; //get image url
-                        var extension = imgurl.split(".")[imgurl.split(".").length - 1]; //use image url to get extension
-                        var path = `./tmpimages/image.${extension}`;
-                        var rspath = `./rstmpimages/rsimage.${extension}`;
-                        getImg(imgurl, path).then(function() {
+                        //var extension = imgurl.split(".")[imgurl.split(".").length - 1]; //use image url to get extension
+                        Jimp.read({
+                            url:imgurl,
+                            headers:{}
+                        }).then(image => {
+                            imgout = image.contain(parseInt(args[0]), parseInt(args[1])).autocrop(20).getBuffer(Jimp.AUTO)
+                        })
+                        
+                        //var path = `./tmpimages/image.${extension}`;
+                        //var rspath = `./rstmpimages/rsimage.${extension}`;
+                        /*getImg(imgurl, path).then(function() {
                             Jimp.read(path).then(img => {
                                 img.contain(parseInt(args[0]), parseInt(args[1])).autocrop().write(rspath);
                             }).then(function() {
-                                /*var embed = new Discord.MessageEmbed()
-                                    .setTitle(`:black_large_square:Here's your image resized to ${args[0]} by ${args[1]}!`)
-                                    .attachFiles([rspath])
-                                    .setImage(`attachment://rsimage.${extension}`);
-                                msg.channel.send(embed);*/
+                                //var embed = new Discord.MessageEmbed()
+                                    //.setTitle(`:black_large_square:Here's your image resized to ${args[0]} by ${args[1]}!`)
+                                    //.attachFiles([rspath])
+                                    //setImage(`attachment://rsimage.${extension}`);
+                                //msg.channel.send(embed);
                                 attachment = new Discord.MessageAttachment(rspath);
                                 msg.channel.send(`Here's your image resized to ${args[0]} by ${args[1]}, <@${msg.author.id}>!`, attachment);
                             }).finally(function() {
                                 fs.unlinkSync(path);
                                 fs.unlinkSync(rspath);
                             });
-                        })
+                        })*/
                         
                     }
                     catch(err) {
