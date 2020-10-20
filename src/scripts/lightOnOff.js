@@ -1,4 +1,4 @@
-const config = import('../config.js');
+const config = import('../config.js.js');
 const {MH, Discovery, Control} = require('magic-home');
 const fs = require('fs');
 
