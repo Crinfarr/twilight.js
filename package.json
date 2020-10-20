@@ -2,7 +2,11 @@
   "name": "twilight.js",
   "productName": "twilight.js",
   "version": "1.0.0",
+<<<<<<< Updated upstream
   "description": "My Electron application description",
+=======
+  "description": "Web controller for Magic-home lights",
+>>>>>>> Stashed changes
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -10,6 +14,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
+<<<<<<< Updated upstream
   },
   "keywords": [],
   "author": {
@@ -46,6 +51,51 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
+=======
+  },
+  "keywords": [],
+  "author": {
+    "name": "Crinfarr",
+    "email": "31548109+Crinfarr@users.noreply.github.com"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "twilight.js"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "discord.js": "^12.3.1",
+  "get-pixels": "^3.3.2",
+  "jimp": "^0.16.1",
+  "magic-home": "^2.6.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Crinfarr/twilights.js/issues"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.53",
@@ -54,5 +104,10 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.53",
     "@electron-forge/maker-zip": "^6.0.0-beta.53",
     "electron": "10.1.4"
+<<<<<<< Updated upstream
   }
+=======
+  },
+  "homepage": "https://github.com/Crinfarr/twilights.js#readme"
+>>>>>>> Stashed changes
 }
