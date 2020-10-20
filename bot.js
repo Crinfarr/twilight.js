@@ -91,6 +91,7 @@ client.on('message', async msg => {
                     msg.channel.send(':x: Unknown error!');
 
                 }
+                break;
             case("lighton"): 
                 if (args.length != 1) {
                     msg.channel.send("Usage: lighton [light]\n\nUse !lights for a list of lights.");
