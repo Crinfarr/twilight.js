@@ -1,0 +1,24 @@
+const fs = require('fs');
+
+module.exports = {
+    discord: {
+        client_id:'client ID here',//all of these can be found on discord's developer portal.
+        client_secret:'client secret here',//these first two are not generally used unless you plan on modifying my code.
+        token:'bot token here',
+        prefix:'!'//this can be any character or sequence of characters.
+    },
+    daddymode: false,//please no
+    lighting:{
+        //lightdesc is what shows up when you run {pf}lights
+        lightdesc:"available lights:\n:one:VR Area pointing north: VRAN\n:two:VR Area pointing South: VRAS\n:three:VR Area pointing East: VRAE\n:four:Desk light: DSK\n:five:Bed Light: BED",
+        lights: JSON.parse(fs.readFileSync('src/json/lightData.json')),
+        //run `node scan.js` in this folder to scan your network for lights and populate lightData.json. it's very badly coded but I'll fix it eventually.
+        lightindexes:{
+            //fill this in with
+            //[LIGHTKEY]: LIGHTINDEX,
+            KEY:0 //example
+            //where light index is the light's index in lightdata.json, starting at 0.  
+            //I could make this auto populate potentially, but it wouldn't have readable names.
+        }
+    }
+}

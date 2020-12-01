@@ -1,0 +1,1 @@
+echo "installing prerequisites..."; npm i --silent; echo "done."; echo "running scan program. all lights will turn off for 15-20 seconds, then turn back on."; node ./src/scripts/scan.js; echo "scan complete"; read -p
