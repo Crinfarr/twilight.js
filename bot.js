@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('./src/scripts/config');
 const Discord = require(`discord.js`);
 const fs = require('fs');
 const mh = require('magic-home');
@@ -34,7 +34,7 @@ client.on('message', async msg => {
         command = args.shift().toLowerCase(); //take command, leave arguments
 
         switch (command) {
-            case ('downrez'):
+            /* case ('downrez'):
                 //check to see if both arguments are specified:
                 if (args.length != 2) {
                     return msg.channel.send("Usage: downrez [width] [height]");
@@ -52,11 +52,11 @@ client.on('message', async msg => {
                             Jimp.read(path).then(img => {
                                 img.contain(parseInt(args[0]), parseInt(args[1])).autocrop().write(rspath);
                             }).then(function() {
-                                /*var embed = new Discord.MessageEmbed()
-                                    .setTitle(`:black_large_square:Here's your image resized to ${args[0]} by ${args[1]}!`)
-                                    .attachFiles([rspath])
-                                    .setImage(`attachment://rsimage.${extension}`);
-                                msg.channel.send(embed);*/
+                                //var embed = new Discord.MessageEmbed()
+                                //    .setTitle(`:black_large_square:Here's your image resized to ${args[0]} by ${args[1]}!`)
+                                //    .attachFiles([rspath])
+                                //    .setImage(`attachment://rsimage.${extension}`);
+                                //msg.channel.send(embed);
                                 attachment = new Discord.MessageAttachment(rspath);
                                 msg.channel.send(`Here's your image resized to ${args[0]} by ${args[1]}, <@${msg.author.id}>!`, attachment);
                             }).finally(function() {
@@ -82,7 +82,7 @@ client.on('message', async msg => {
                     msg.channel.send(':x: Unknown error!');
 
                 }
-                break;
+                break; */
             case("lighton"): 
                 if (args.length != 1) {
                     msg.channel.send("Usage: lighton [light]\n\nUse !lights for a list of lights.");
@@ -117,7 +117,7 @@ client.on('message', async msg => {
                     msg.channel.send(embed);
                 }
                 break;
-            /*case("lightcolor"):
+            /* case("lightcolor"):
                 if (args.length != 2) {
                     msg.channel.send("Usage: lightcolor [light] [hex color]\n\n")
                 }
@@ -144,17 +144,18 @@ client.on('message', async msg => {
                         .attachFiles(['./images/Twilightjs_logo_sm.png'])
                         .setAuthor('TwilightBot', 'attachment://Twilightjs_logo_sm.png')
                         .setTimestamp();
-                    ctrl.setColorAndWhites(color.r, color.g, color.b, 0);
+                    try {ctrl.setColor(color.r, color.g, color.b)} catch (err) {};
                     msg.channel.send(embed);
                 }
-                break;*/
+                break; */
             case("lights"):
                 msg.channel.send(config.lighting.lightdesc);
                 break;
             case ('help'):
                 var embed = new Discord.MessageEmbed()
                     .setTitle("Command reference")
-                    .setDescription("!lights: Lists available lights to change\n!downrez [x resize] [y resize]: Resizes most attached images\n!lighton [light ID]: powers on a light\n!lightoff [light ID]: powers off a light\n\n!lightcolor COMING SOON.");
+                    //.setDescription("!lights: Lists available lights to change\n!downrez [x resize] [y resize]: Resizes most attached images\n!lighton [light ID]: powers on a light\n!lightoff [light ID]: powers off a light\n\n!lightcolor COMING SOON.");
+                    .setDescription("!lights: Lists available lights to change\n!lighton [light ID]: powers on a light\n!lightoff [light ID]: powers off a light\n\n!lightcolor [light ID] [6 digit hex color]");
                 msg.channel.send(embed);
                 break;
             default:
